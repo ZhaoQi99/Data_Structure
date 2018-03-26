@@ -1,0 +1,16 @@
+# depslib dependency file v1.0
+1510065588 source:f:\code\c plus\data_structure\exercise\实习题\实习2_算术表达式求值演示\stack.cpp
+	"Stack.h"
+	<stdio.h>
+
+1510065393 f:\code\c plus\data_structure\exercise\实习题\实习2_算术表达式求值演示\stack.h
+	"../../../template.h"
+	<stdlib.h>
+
+1505541988 f:\code\c plus\data_structure\template.h
+
+1510147297 source:f:\code\c plus\data_structure\exercise\实习题\实习2_算术表达式求值演示\main.cpp
+	<stdio.h>
+	"stack.h"
+	<string.h>
+

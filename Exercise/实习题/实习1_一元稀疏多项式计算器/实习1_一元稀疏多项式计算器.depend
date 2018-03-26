@@ -1,0 +1,52 @@
+# depslib dependency file v1.0
+1509411593 source:f:\code\c plus\data_structure\exercise\实习题\实习1_一元稀疏多项式计算器\main.cpp
+	"Polynomial.h"
+
+1508759412 f:\code\c plus\data_structure\book\线性表\05_polynomial\polynomial.h
+	"../../../template.h"
+	"ExtenLinkedList.cpp"
+	<stdlib.h>
+	<math.h>
+	<time.h>
+
+1505541988 f:\code\c plus\data_structure\template.h
+
+1508768192 f:\code\c plus\data_structure\book\线性表\05_polynomial\extenlinkedlist.cpp
+	"ExtenLinkedList.h"
+	<stdio.h>
+	<stdlib.h>
+
+1508432205 f:\code\c plus\data_structure\book\线性表\05_polynomial\extenlinkedlist.h
+	"../../../template.h"
+
+1508768192 source:f:\code\c plus\data_structure\exercise\实习题\实习1_一元稀疏多项式计算器\extenlinkedlist.cpp
+	"ExtenLinkedList.h"
+	<stdio.h>
+	<stdlib.h>
+
+1509410502 f:\code\c plus\data_structure\exercise\实习题\实习1_一元稀疏多项式计算器\extenlinkedlist.h
+	"../../../template.h"
+
+1509410197 f:\code\c plus\data_structure\exercise\实习题\实习1_一元稀疏多项式计算器\polynomial.cpp
+	<stdio.h>
+	"Polynomial.h"
+	<time.h>
+
+1509410741 f:\code\c plus\data_structure\exercise\实习题\实习1_一元稀疏多项式计算器\polynomial.h
+	"../../../template.h"
+	"ExtenLinkedList.h"
+	<stdlib.h>
+	<stdio.h>
+	<math.h>
+	<time.h>
+
+1508768192 f:\code\c plus\data_structure\exercise\实习题\实习1_一元稀疏多项式计算器\extenlinkedlist.cpp
+	"ExtenLinkedList.h"
+	<stdio.h>
+	<stdlib.h>
+
+1509411643 source:f:\code\c plus\data_structure\exercise\实习题\实习1_一元稀疏多项式计算器\polynomial.cpp
+	<stdio.h>
+	"Polynomial.h"
+	<time.h>
+

@@ -1,0 +1,25 @@
+# depslib dependency file v1.0
+1510064775 source:f:\code\c plus\data_structure\exercise\实习题\实习2_魔王语言解释\main.cpp
+	"Stack.h"
+	"Queue.h"
+	<stdio.h>
+	<string.h>
+
+1510014118 source:f:\code\c plus\data_structure\exercise\实习题\实习2_魔王语言解释\queue.cpp
+	"Queue.h"
+	<stdio.h>
+
+1510014143 f:\code\c plus\data_structure\exercise\实习题\实习2_魔王语言解释\queue.h
+	"../../../template.h"
+	<stdlib.h>
+
+1505541988 f:\code\c plus\data_structure\template.h
+
+1510014107 source:f:\code\c plus\data_structure\exercise\实习题\实习2_魔王语言解释\stack.cpp
+	"Stack.h"
+	<stdio.h>
+
+1510014148 f:\code\c plus\data_structure\exercise\实习题\实习2_魔王语言解释\stack.h
+	"../../../template.h"
+	<stdlib.h>
+

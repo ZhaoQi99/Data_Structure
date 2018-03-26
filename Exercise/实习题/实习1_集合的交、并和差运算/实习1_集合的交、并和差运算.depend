@@ -1,0 +1,26 @@
+# depslib dependency file v1.0
+1508202704 source:f:\code\c plus\data_structure\exercise\实习1_集合的交、并和差运算\main.cpp
+	<stdio.h>
+
+1513165835 source:f:\code\c plus\data_structure\exercise\实习题\实习1_集合的交、并和差运算\main.cpp
+	"Set.h"
+	<conio.h>
+
+1509370804 source:f:\code\c plus\data_structure\exercise\实习题\实习1_集合的交、并和差运算\extenlinkedlist.cpp
+	"ExtenLinkedList.h"
+	<stdlib.h>
+	<stdio.h>
+
+1509369748 f:\code\c plus\data_structure\exercise\实习题\实习1_集合的交、并和差运算\extenlinkedlist.h
+	"../../../template.h"
+
+1505541988 f:\code\c plus\data_structure\template.h
+
+1509886601 f:\code\c plus\data_structure\exercise\实习题\实习1_集合的交、并和差运算\set.h
+	"ExtenLinkedList.h"
+	<stdlib.h>
+	<stdio.h>
+
+1509888195 source:f:\code\c plus\data_structure\exercise\实习题\实习1_集合的交、并和差运算\set.cpp
+	"Set.h"
+

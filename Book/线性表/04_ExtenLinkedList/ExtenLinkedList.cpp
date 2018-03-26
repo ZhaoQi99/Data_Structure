@@ -1,0 +1,428 @@
+/*
+Problem:扩展的带头节点的线性链表
+Author:QiZhao
+Data:2017-10-19
+Description:严蔚敏版数据结构课本源码
+Copyright  2017 QiZhao. All rights reserved.
+*/
+#include"ExtenLinkedList.h"
+#include<stdio.h>
+#include<stdlib.h>
+
+Status MakeNode(Link &p, ElemType e)
+{
+    //分配由p指向值为e的结点，并返回OK；若返回失败,则返回ERROR
+    p = (Link)malloc(sizeof(LNode));
+    if(!p)
+        return OVERFLOW;
+    p->data = e;
+    p->next = NULL;
+    return OK;
+}
+
+void FreeNode(Link &p)
+{
+    //释放p所指结点
+    free(p);
+    p = NULL;
+}
+
+Status InitList(LinkList &L)
+{
+    // 构造一个空的线性表L。
+    Link p;
+    p = (Link)malloc(sizeof(LNode));
+    if(!p)
+        return OVERFLOW;
+    p->next = NULL;
+    L.head = L.tail = p;
+    L.len = 0;
+    return OK;
+}
+
+Status DestroyList(LinkList & L)
+{
+    //销毁线性表L,L不再存在
+    Link p = GetHead(L);
+    Link q;
+    while(p!=GetLast(L))
+    {
+        q = p->next;
+        FreeNode(p);
+        p = q;
+    }
+    FreeNode(L.tail);
+    L.len=0;
+    L.head=NULL;
+    return OK;
+}
+
+Status ClearList(LinkList & L)
+{
+    //将L重置为空表,并释放原链表的结点空间
+    Link p = GetHead(L)->next; //p指向第一个结点
+    Link q;
+    while(p)
+    {
+        q = p->next;
+        FreeNode(p);
+        p = q;
+    }
+    L.len=0;
+    L.tail=GetHead(L);
+    return OK;
+}
+
+Status InsFirst(LinkList &L,Link h, Link s)
+{
+    //已知h指向线性链表的头结点,将s所指结点插入在第一个结点之前
+    Link p=h->next;//p指向第一个结点
+    s->next=p;
+    h->next=s;
+    L.len++;
+    return OK;
+}
+
+Status DelFirst(LinkList &L,Link h, Link &q)
+{
+    //已知h指向线性链表的头结点,删除链表中第一个结点并以q返回
+    q=h->next;
+    h->next=q->next;
+    L.len--;
+    return OK;
+}
+
+Status Append(LinkList &L, Link s)
+{
+    //将指针s所指(彼此以指针相链)的一串结点链接在线性链表L的最后一个结点
+    //之后,并改变链表L的尾指针指向新的尾结点
+    Link q=L.tail;
+    while(s!=NULL)
+    {
+        q->next=s;
+        q=s;
+        s=s->next;
+        L.len++;
+    }
+    L.tail=q;//尾指针指向新的尾结点
+    return  OK;
+}
+
+Status Remove(LinkList &L, Link &q)
+{
+    //删除线性链表L中的尾结点并以q返回,改变链表L的尾指针指向新的尾结点
+    Link p=GetHead(L);
+    if(L.head==L.tail)
+        return ERROR;
+    while(p->next!=L.tail)
+        p=p->next;
+    L.tail=p;
+    p=p->next;
+    q->data=p->data;
+    //FreeNode(p);
+    L.len--;
+    return OK;
+}
+
+Status InsBefore(LinkList &L, Link &p, Link s)
+{
+    //已知p指向线性链表L中的一个结点,将s所指结点插入在p所指结点之前,
+    //并修改指针p指向新插入的结点
+    Link q=GetHead(L);
+    while(q->next != p)
+        q = q->next;
+    s->next=q->next;
+    q->next=s;
+    if(p==L.head->next)//p所指结点为第一个时
+        L.head=p;
+    p=s;
+    L.len++;
+    return OK;
+}
+
+Status InsAfter(LinkList &L, Link &p, Link s)
+{
+    //已知p指向线性链表L中的一个结点,将s所指结点插入在p所指结点之后,
+    //并修改指针p指向新插入的结点
+    Link q=GetHead(L);
+    while(q!=p)
+        q=q->next;
+    s->next=p->next;
+    p->next=s;
+    if(p==GetLast(L))
+        L.tail=s;
+    p=s;
+    L.len++;
+    return OK;
+}
+
+Status ListInsert(LinkList &L, int i, ElemType e)
+{
+    // 在带头结点的扩展的单链线性表L的第i个元素之前插入元素e
+    Link p, s;
+    p = GetHead(L);
+    int j = 0;
+    if (!p || j > i - 1)
+        return ERROR;    // i小于1或者大于表长
+    while (p && j < i - 1)  // 寻找第i-1个结点
+    {
+        p = p->next;
+        ++j;
+    }
+    if(!MakeNode(s,e))  // 生成新结点
+        return OVERFLOW;
+    s->next = p->next;      // 插入L中
+    p->next = s;
+    if(i==ListLength(L)+1)
+        L.tail=s;
+    L.len++;
+    return OK;
+}
+
+Status SetCurElem(Link &p, ElemType e)
+{
+    //已知p指向线性链表中的一个结点,用e更新p所指结点中数据元素的值
+    p->data=e;
+    return OK;
+}
+
+ElemType GetCurElem(Link p)
+{
+    //已知p指向线性链表中的一个结点,返回p所指结点中数据元素的值
+    return p->data;
+}
+
+Status ListEmpty(LinkList L)
+{
+    //若L为空表,则返回TRUE,否则返回FALSE
+    if(L.len==0)
+        return TRUE;
+    else
+        return FALSE;
+}
+
+int ListLength(LinkList L)
+{
+    //返回L中数据元素个数
+    return L.len;
+}
+
+Position GetHead(LinkList L)
+{
+    //返回线性表L中头结点的位置
+    return L.head;
+}
+
+Position GetLast(LinkList L)
+{
+    //返回线性表L中最后一个结点的位置
+    return L.tail;
+}
+
+Position PriorPos(LinkList L, Link p)
+{
+    //已知p指向线性链表L中的一个结点,返回p所指结点的直接前驱的位置,
+    //若无前驱,则返回NULL
+    Link q=GetHead(L);
+    if(p==q->next)//第一个结点无直接前驱
+        return NULL;
+    while(q->next!=p)
+        q=q->next;
+    return q;
+}
+
+Position NextPos(LinkList L, Link p)
+{
+    //已知p指向线性链表L中的一个结点,返回p所指结点的直接后继的位置,
+    //若无后继,则返回NULL
+    Link q=GetHead(L);
+    while(q!=p)
+        q=q->next;
+    if(q==L.tail)//最后一个结点无直接后继
+        return NULL;
+    q=q->next;
+    return q;
+}
+
+Status LocatePos(LinkList L, int i, Link &p)
+{
+    //返回p指示线性链表L中第i个结点的位置,并返回OK,i值不合法时返回ERROR
+    if(i<1||i>L.len)//i值不合法
+        return ERROR;
+    Link q=GetHead(L);
+    while(i--)
+    {
+        q=q->next;
+    }
+    p=q;
+    return OK;
+}
+
+Position LocateElem(LinkList L, ElemType e, Status (*compare)(ElemType, ElemType))
+{
+    // 在链式线性表L中查找第1个值与e满足compare()的元素的位置
+    // 若不存在这样的元素,则返回NULL
+    Link p=GetHead(L)->next;
+    while(p != L.tail &&(!compare(p->data, e)))
+    {
+        p = p->next;
+    }
+    if(p==L.tail)
+        return NULL;
+    else
+        return p;
+}
+
+Status ListTraverse(LinkList L, Status (*visit)(ElemType))
+{
+    //依次对L的每个数据元素调用函数visit().一旦visit()失败，则操作失败
+    Link p=GetHead(L);
+    int len=ListLength(L);
+    while(len--)
+    {
+        p=p->next;
+        visit(p->data);
+    }
+    return OK;
+}
+
+Status visit(ElemType e)
+{
+    printf("%d ",e);
+    return OK;
+}
+
+Status compare(ElemType a, ElemType b)
+{
+    return a>b?TRUE:FALSE;
+}
+
+int main()
+{
+    LinkList L;
+    ElemType e;
+    Link s,p;
+    int i;
+
+    printf("*********************************函数InitList测试*********************************\n");
+    InitList(L) ? printf("初始化扩展的链表成功\n") : printf("初始化扩展的链表失败\n");
+
+    printf("*********************************函数ListEmpty测试*********************************\n");
+    ListEmpty(L) ? printf("扩展的链表L为空\n") : printf("扩展的链表L不为空\n");
+
+    printf("*********************************函数ListInsert测试*********************************\n");
+    for(i = 1; i <= 15; i++) //插入15个数据元素
+    {
+        e = rand() % 300; //实际为41、167、34、100、269、124、78、258、262、164、5、245、181、27、61、
+        printf("在第%d个位置插入\"%d\"\n", i,e);
+        ListInsert(L,i,e);
+    }
+
+    printf("*********************************函数ListTraverse测试*********************************\n");
+    printf("扩展的链表L中元素 = ");
+    ListTraverse(L, visit);
+    printf("\n");
+
+    printf("*********************************函数GetCurElem测试*********************************\n");
+    s=GetHead(L)->next;//s指向第一个结点
+    printf("第一个结点的元素为:%d\n",GetCurElem(s));
+
+    printf("*********************************函数SetCurElem测试*********************************\n");
+    SetCurElem(s,99);
+    printf("将第一个结点的元素修改为:\"99\"\n");
+    ListTraverse(L,visit);
+    printf("\n");
+
+    printf("*********************************函数DelFirst测试*********************************\n");
+    DelFirst(L,GetHead(L),s);
+    printf("删除扩展的链表L中第1个元素:\"%d\"\n", s->data);
+    ListTraverse(L, visit);
+    printf("\n");
+
+    printf("*********************************函数InsFirst测试*********************************\n");
+    InsFirst(L,GetHead(L),s);
+    printf("在扩展的链表L的第1个位置前添加元素:\"%d\"\n", s->data);
+    ListTraverse(L, visit);
+    printf("\n");
+
+    printf("*********************************函数Remove测试********************************\n");
+    MakeNode(p,0);
+    Remove(L,p);
+    printf("删除扩展的链表的尾结点:\"%d\"\n",p->data);
+    ListTraverse(L,visit);
+    printf("\n");
+
+    printf("*********************************函数ListLength测试*********************************\n");
+    printf("扩展的链表L的长度为:length = %d\n", ListLength(L));
+
+    printf("*********************************函数LocatePos测试*********************************\n");
+    LocatePos(L,5,s);
+    printf("扩展的链表L中第五个位置的元素为%d\n", s->data);
+
+    printf("*********************************函数InsAfter测试*********************************\n");
+    LocatePos(L,4,p);//p指向第四个位置的元素
+    s=(Link)malloc(sizeof(LNode));
+    s->data=66;
+    InsAfter(L,p,s);
+    printf("在扩展的链表L中第四个位置的后面插入元素:%d\n",s->data);
+    ListTraverse(L,visit);
+    printf("\n");
+
+    printf("*********************************函数InsBefore测试*********************************\n");
+    LocatePos(L,4,p);//p指向第四个位置的元素
+    s=(Link)malloc(sizeof(LNode));
+    s->data=88;
+    InsBefore(L,p,s);
+    printf("在扩展的链表L中第四个位置的前面插入元素:%d\n",s->data);
+    ListTraverse(L,visit);
+    printf("\n");
+
+    printf("*********************************函数LocateElem测试*********************************\n");
+    s = LocateElem(L,15,compare);
+    s == NULL ? printf("大于15的元素不存在\n") : printf("第一个大于15的元素为%d\n", s->data);
+    s = LocateElem(L,999,compare);
+    s == NULL ? printf("大于999的元素不存在\n") : printf("第一个大于999的元素为%d\n", s->data);
+
+    printf("*********************************函数PriorPos测试*********************************\n");
+    s=PriorPos(L, p);
+    printf("元素\"%d\"的前驱为%d\n",p->data,s->data);
+
+    printf("*********************************函数NextPos测试*********************************\n");
+    s=NextPos(L, p);
+    printf("元素\"%d\"的后继为%d\n",p->data, s->data);
+
+    printf("*********************************函数Append测试*********************************\n");
+    MakeNode(s,0);
+    p=s;
+    printf("在扩展的链表的结尾接上一串结点:");
+    for(i=0;i<6;i++)//使s指向一串结点
+    {
+        Link m;
+        m=p;
+        m->data=rand()%300;
+        visit(m->data);
+        MakeNode(p,0);
+        m->next=p;
+    }
+    printf("\n");
+    Append(L,s);
+    ListTraverse(L,visit);
+    printf("\n");
+
+    printf("*********************************函数ClearList测试*********************************\n");
+    printf("重置链表L前：");
+    ListEmpty(L) ? printf("链表L为空\n") : printf("链表L不为空\n");
+    ClearList(L);
+    printf("重置链表L后：");
+    ListEmpty(L) ? printf("链表L为空\n") : printf("链表L不为空\n");
+
+    printf("*********************************函数DestroyList测试*********************************\n");
+    printf("销毁链表L前：");
+    GetHead(L)? printf("链表L存在\n") : printf("链表L不存在\n");
+    DestroyList(L);
+    printf("销毁链表L后：");
+    GetHead(L)? printf("链表L存在\n") : printf("链表L不存在\n");
+
+    return 0;
+}
+

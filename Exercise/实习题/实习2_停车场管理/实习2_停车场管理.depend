@@ -1,0 +1,40 @@
+# depslib dependency file v1.0
+1509638809 source:f:\code\c plus\data_structure\exercise\实习题\实习2_停车场管理\stack.cpp
+	"Stack.h"
+	<stdio.h>
+
+1509642083 f:\code\c plus\data_structure\exercise\实习题\实习2_停车场管理\stack.h
+	"../../../template.h"
+	<stdlib.h>
+	"Car.h"
+
+1505541988 f:\code\c plus\data_structure\template.h
+
+1509816223 source:f:\code\c plus\data_structure\exercise\实习题\实习2_停车场管理\main.cpp
+	"CarPark.h"
+
+1509815730 f:\code\c plus\data_structure\exercise\实习题\实习2_停车场管理\carpark.h
+	"Stack.h"
+	"Queue.h"
+	<string.h>
+	<time.h>
+	<conio.h>
+
+1509638465 f:\code\c plus\data_structure\exercise\实习题\实习2_停车场管理\carpark.cpp
+	"CarPark.h"
+
+1509816425 source:f:\code\c plus\data_structure\exercise\实习题\实习2_停车场管理\carpark.cpp
+	<stdio.h>
+	"CarPark.h"
+
+1509642098 f:\code\c plus\data_structure\exercise\实习题\实习2_停车场管理\queue.h
+	"../../../template.h"
+	<stdlib.h>
+	"Car.h"
+
+1509637626 source:f:\code\c plus\data_structure\exercise\实习题\实习2_停车场管理\queue.cpp
+	"Queue.h"
+	<stdio.h>
+
+1509642072 f:\code\c plus\data_structure\exercise\实习题\实习2_停车场管理\car.h
+
